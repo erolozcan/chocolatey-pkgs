@@ -6,7 +6,8 @@ $packageName = 'nexus-oss'
 if (Get-Command nexus -ErrorAction SilentlyContinue) {
     Write-Host "Stopping and uninstalling Nexus service..."
     try {
-        # Note: '0 | nexus' pattern matches install script style for consistency
+        # Using '0 | nexus' pattern (consistent with install script) to pipe a value
+        # which the nexus.bat script may use for automation/non-interactive mode
         0 | nexus stop
         0 | nexus uninstall
         Write-Host "Nexus service uninstalled successfully"
