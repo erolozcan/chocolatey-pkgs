@@ -3,9 +3,10 @@ $ErrorActionPreference = 'Stop'
 $packageName = 'nexus-oss'
 
 # Stop and uninstall the Nexus service if it exists
-if (gcm nexus -ea 0) {
+if (Get-Command nexus -ErrorAction SilentlyContinue) {
     Write-Host "Stopping and uninstalling Nexus service..."
     try {
+        # Note: '0 | nexus' pattern matches install script style for consistency
         0 | nexus stop
         0 | nexus uninstall
         Write-Host "Nexus service uninstalled successfully"
